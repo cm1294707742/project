@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iotek.dao.ResumeMapper">
+
+
+    <insert id="addNewResume">
+        INSERT INTO T_URESUME VALUES (URE_SEQ.nextval,#{urname},#{ursex},#{urnative},#{urschool},#{uredu},
+        #{urtel},#{urbirthday},#{uremail},#{urskills},#{urhobby},#{urexperience},#{urintroduce},#{user.id})
+    </insert>
+    <update id="updateResume">
+        UPDATE T_URESUME SET UR_NAME=#{urname},UR_SEX=#{ursex},UR_NATIVE=#{urnative},UR_SCHOOL=#{urschool},UR_EDU=#{uredu},
+        UR_TEL=#{urtel},UR_BIRTHDAY=#{urbirthday},UR_EMAIL=#{uremail},UR_SKILLS=#{urskills},UR_HOBBY=#{urhobby},
+        UR_EXPERIENCE=#{urexperience},UR_INTRODUCE=#{urintroduce} where UR_ID=#{resume.urid}
+    </update>
+    <delete id="deleteResume">
+        DELETE FROM T_URESUME WHERE UR_ID=#{urid}
+    </delete>
+    <select id="getResumeByUser" resultType="com.iotek.model.Resume">
+        SELECT * FROM T_URESUME WHERE U_ID=#{user.id}
+    </select>
+    <select id="getResumeByPage" resultType="com.iotek.model.Resume">
+            SELECT * from (SELECT T_URESUME.*,rownum rn FROM T_URESUME WHERE T_URESUME.U_ID=#{0})
+        and rn between #{1} and #{2}
+    </select>
+</mapper>

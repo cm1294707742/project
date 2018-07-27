@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="db.properties"/>
+
+    <!--<settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>-->
+
+    <typeAliases>
+        <typeAlias type="com.iotek.model.User" alias="user"/>
+
+        <!--别名是类名，大小写都可以-->
+        <!--<package name="com.gwy.model"/>-->
+    </typeAliases>
+
+    <environments default="mysql">
+        <environment id="mysql">
+            <!--JDBC事务-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.pass}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper class="com.iotek.dao.UserDao"/>
+    </mappers>
+
+
+</configuration>
