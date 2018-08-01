@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by sakura浮沉 on 2018/7/26.
  */
-public class Resume implements Serializable {
+public class Resume implements Serializable {   //用户简历类
     private int urid;
     private String urname;
     private String ursex;

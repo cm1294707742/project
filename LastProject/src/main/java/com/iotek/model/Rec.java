@@ -6,17 +6,17 @@ import java.util.Date;
 /**
  * Created by sakura浮沉 on 2018/7/26.
  */
-public class Rec implements Serializable {
+public class Rec implements Serializable {   //招聘类
     private int rid;
     private String rname;
-    private String rdepartment;
-    private String rinformation;
-    private String rrequirements;
-    private String raddress;
-    private String rsalary;
-    private Date rtime;
-    private int rcount;
-    private int rstate;
+    private String rdepartment;    //部门
+    private String rinformation;    //描述
+    private String rrequirements;   //要求
+    private String raddress;      //上班地点
+    private String rsalary;    //薪资
+    private Date rtime;        //发布时间
+    private int rcount;     //数量
+    private int rstate;     //是否发布了
 
     public Rec() {
     }

@@ -25,4 +25,7 @@
             SELECT * from (SELECT T_URESUME.*,rownum rn FROM T_URESUME WHERE T_URESUME.U_ID=#{0})
         and rn between #{1} and #{2}
     </select>
+    <select id="getResumeByRid" resultType="com.iotek.model.Resume">
+        SELECT * from T_URESUME WHERE UR_ID=#{urid};
+    </select>
 </mapper>

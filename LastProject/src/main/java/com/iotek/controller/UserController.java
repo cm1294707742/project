@@ -1,9 +1,10 @@
 package com.iotek.controller;
 
-import com.iotek.dao.RecMapper;
 import com.iotek.model.Rec;
+import com.iotek.model.Resume;
 import com.iotek.model.User;
 import com.iotek.service.RecService;
+import com.iotek.service.ResumeService;
 import com.iotek.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -24,6 +24,8 @@ public class UserController {
     private UserService userService;
     @Resource
     private RecService recService;
+    @Resource
+    private ResumeService resumeService;
     @RequestMapping("/userLogin")
     public String login(User user, Model model, HttpSession session) throws Exception{
         if  (user.getUname()==null||user.getUpass()==null){
@@ -32,10 +34,10 @@ public class UserController {
         User user1 = userService.getUserByNamePass(user);
         if (null!=user1){
             session.setAttribute("user",user1);
-            return "success";
+            return "/success.jsp";
         }else {
             model.addAttribute("str","用户名或密码错误");
-            return "userLogin";
+            return "/userLogin.jsp";
         }
     }
 
@@ -51,7 +53,7 @@ public class UserController {
         }else {
             userService.addNewUser(user1);
             model.addAttribute("str","注册成功");
-            return "userLogin";
+            return "/userLogin.jsp";
         }
     }
     @RequestMapping("/")
@@ -67,6 +69,32 @@ public class UserController {
         session.setAttribute("showRecByPageRecList",recList1);
         session.setAttribute("currentPage",currentPage);
         session.setAttribute("totalPages",totalPages);
-        return "success";
+        return "/success";
+    }
+
+    @RequestMapping("/sendResume")
+    public String sendResume(HttpSession session, Model model){
+            User user= (User) session.getAttribute("user");
+            if (user==null){
+                return "login";
+            }else {
+                return "showUserResume";
+            }
+    }
+    @RequestMapping("/showUserResume")
+    public String showUserResume(@RequestParam(value = "currentPage",defaultValue = "1")int currentPage, HttpSession session){
+        User user= (User) session.getAttribute("user");
+        List<Resume> resumeList=resumeService.getResumeByUser(user);
+        int pageSize = 2;
+        int totalRows  = resumeList.size();
+        int totalPages = totalRows%pageSize==0?totalRows/pageSize :totalRows/pageSize + 1;
+        int begin = (currentPage-1)*pageSize+1;
+        int end = (currentPage-1)*pageSize+pageSize;
+        List<Resume> resumeList1=resumeService.getResumeByPage(user.getId(),begin,end);
+        session.setAttribute("showResumeByPageRecList",resumeList1);
+        session.setAttribute("currentPage",currentPage);
+        session.setAttribute("totalPages",totalPages);
+        System.out.println("+++++++++  success");
+        return "../../success";
     }
 }

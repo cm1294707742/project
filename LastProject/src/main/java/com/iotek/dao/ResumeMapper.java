@@ -14,4 +14,5 @@ public interface ResumeMapper {
     List<Resume> getResumeByUser(User user);
     List<Resume> getResumeByPage(int uid,int begin, int end);
     void updateResume(Resume resume);
+    Resume getResumeByRid(Resume resume);
 }

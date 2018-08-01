@@ -35,4 +35,8 @@ public class ResumeServiceImpl implements ResumeService {
     public void updateResume(Resume resume) {
         resumeMapper.updateResume(resume);
     }
+
+    public Resume getResumeByRid(Resume resume) {
+        return resumeMapper.getResumeByRid(resume);
+    }
 }

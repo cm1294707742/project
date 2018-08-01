@@ -5,7 +5,7 @@
          version="3.1">
 
   <welcome-file-list>
-    <welcome-file>pages/userLogin.jsp</welcome-file>
+    <welcome-file>success.jsp</welcome-file>
   </welcome-file-list>
 
   <servlet-mapping>
