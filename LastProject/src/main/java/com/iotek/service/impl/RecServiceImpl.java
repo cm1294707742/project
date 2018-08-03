@@ -22,4 +22,8 @@ public class RecServiceImpl implements RecService {
     public List<Rec> getRecByPage(int state, int begin, int end) {
         return recMapper.getRecByPage(state,begin,end);
     }
+
+    public Rec getRecById(Rec rec) {
+        return recMapper.getRecById(rec);
+    }
 }

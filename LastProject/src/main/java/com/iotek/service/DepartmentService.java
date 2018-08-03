@@ -1,14 +1,13 @@
-package com.iotek.dao;
+package com.iotek.service;
 
 import com.iotek.model.Department;
-import com.iotek.model.Interview;
 
 import java.util.List;
 
 /**
- * Created by sakura¸¡³Á on 2018/7/30.
+ * Created by sakura¸¡³Á on 2018/8/3.
  */
-public interface DepartmentMapper {
+public interface DepartmentService {
     List<Department> getDepartment();
     List<Department> getDepartmentByPage( int begin, int end );
     void addNewDepartment(Department department);

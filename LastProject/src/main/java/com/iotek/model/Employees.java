@@ -6,22 +6,32 @@ import java.util.Date;
 /**
  * Created by sakura浮沉 on 2018/7/30.
  */
+//员工表
 public class Employees implements Serializable {
-    private int eid;
-    private String ename;
-    private String esex;
-    private String eschool;
-    private String eedu;
-    private String etel;
-    private String eemail;
-    private String eexp;
-    private Date egratime;
-    private String eprofess;
-    private String eintroduce;
-    private Date ebirthday;
-    private Department department;
+    private int eid;        //员工id
+    private String ename;      //员工姓名
+    private String esex;   //性别
+    private String eschool;  //毕业学校
+    private String eedu;   //学历
+    private String etel;      //电话
+    private String eemail;    //邮箱
+    private String eexp;    //工作经验
+    private Date egratime;   //录用时间
+    private String eprofess;      //专业
+    private String eintroduce;      //个人介绍
+    private Date ebirthday;       //出生年月
+    private Department department;    //部门
+    private Title title;           //职称
 
     public Employees() {
+    }
+
+    public Title getTitle() {
+        return title;
+    }
+
+    public void setTitle(Title title) {
+        this.title = title;
     }
 
     public int getEid() {

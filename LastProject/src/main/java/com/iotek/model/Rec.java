@@ -9,7 +9,7 @@ import java.util.Date;
 public class Rec implements Serializable {   //招聘类
     private int rid;
     private String rname;
-    private String rdepartment;    //部门
+    private Department department;    //部门
     private String rinformation;    //描述
     private String rrequirements;   //要求
     private String raddress;      //上班地点
@@ -37,12 +37,12 @@ public class Rec implements Serializable {   //招聘类
         this.rname = rname;
     }
 
-    public String getRdepartment() {
-        return rdepartment;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setRdepartment(String rdepartment) {
-        this.rdepartment = rdepartment;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public String getRinformation() {

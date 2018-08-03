@@ -11,6 +11,11 @@
     <select id="getRecByState" resultType="com.iotek.model.Rec">
         SELECT * FROM T_REC WHERE WHERE R_STATE=#{0};
     </select>
+    <select id="getRecById" resultType="com.iotek.model.Rec">
+        SELECT * FROM T_REC WHERE R_ID=#{rid}
+    </select>
+    <resultMap id="Rec_Department" type="">
 
+    </resultMap>
 
 </mapper>

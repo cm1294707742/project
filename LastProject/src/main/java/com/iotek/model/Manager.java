@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Created by sakura浮沉 on 2018/7/30.
  */
+//管理员表
 public class Manager implements Serializable {
     private int mid;
     private String mname;

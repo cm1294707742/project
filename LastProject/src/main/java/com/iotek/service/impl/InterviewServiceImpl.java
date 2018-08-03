@@ -30,4 +30,8 @@ public class InterviewServiceImpl implements InterviewService {
     public void updateInterviewInvite(Interview interview) {
          interviewMapper.updateInterviewInvite(interview);
     }
+
+    public void addNewInterview(Interview interview) {
+        interviewMapper.addNewInterview(interview);
+    }
 }

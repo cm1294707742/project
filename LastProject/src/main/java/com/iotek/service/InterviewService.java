@@ -12,4 +12,5 @@ public interface InterviewService {
     List<Interview> getInterviewByPage(int read, int begin, int end );
     void updateInterviewRead(Interview interview);
     void updateInterviewInvite(Interview interview);
+    void addNewInterview(Interview interview);
 }

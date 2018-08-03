@@ -7,6 +7,13 @@
     <insert id="addNewEmployees">
         INSERT INTO T_USER VALUES (USER_SEQ.nextval,#{uname},#{upass})
     </insert>
+    <delete id="deleteEmployees"></delete>
+    <select id="getAllEmployees" resultType="com.iotek.model.Employees"></select>
+    <select id="getAllEmployeesByPages" resultType="com.iotek.model.Employees"></select>
+    <select id="getAllEmployeesByDepartmemt" resultType="com.iotek.model.Employees"></select>
+    <select id="getAllEmployeesByDepartmentPages" resultType="com.iotek.model.Employees"></select>
+    <select id="getAllEmployeesByDepartmentAndTitle" resultType="com.iotek.model.Employees"></select>
+    <select id="getAllEmployeesByDepartmentAndTitlePages" resultType="com.iotek.model.Employees"></select>
 
 
 </mapper>

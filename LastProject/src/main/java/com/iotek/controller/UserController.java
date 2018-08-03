@@ -1,18 +1,18 @@
 package com.iotek.controller;
 
-import com.iotek.model.Rec;
-import com.iotek.model.Resume;
-import com.iotek.model.User;
-import com.iotek.service.RecService;
-import com.iotek.service.ResumeService;
-import com.iotek.service.UserService;
+import com.iotek.model.*;
+import com.iotek.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +26,10 @@ public class UserController {
     private RecService recService;
     @Resource
     private ResumeService resumeService;
+    @Resource
+    private InterviewService interviewService;
+    @Resource
+    private WaitInterService waitInterService;
     @RequestMapping("/userLogin")
     public String login(User user, Model model, HttpSession session) throws Exception{
         if  (user.getUname()==null||user.getUpass()==null){
@@ -73,12 +77,16 @@ public class UserController {
     }
 
     @RequestMapping("/sendResume")
-    public String sendResume(HttpSession session, Model model){
+    public String sendResume(Resume resume,Rec rec,HttpSession session, Model model){
             User user= (User) session.getAttribute("user");
+            Rec rec1=recService.getRecById(rec);
+
             if (user==null){
-                return "login";
+                return "userlogin";
             }else {
-                return "showUserResume";
+                session.setAttribute("rec",rec1);
+               // session.setAttribute("resume",resume1);
+                return "chooseResume";
             }
     }
     @RequestMapping("/showUserResume")
@@ -96,5 +104,57 @@ public class UserController {
         session.setAttribute("totalPages",totalPages);
         System.out.println("+++++++++  success");
         return "../../success";
+    }
+    @RequestMapping("/chooseResume")
+    public String chooseResuem(HttpSession session,Model model,Resume resume){
+        Resume resume1=resumeService.getResumeByRid(resume);
+        Rec rec= (Rec) session.getAttribute("rec");
+        User user= (User) session.getAttribute("user");
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date=new Date();
+        Interview interview=new Interview(user,rec,resume1,date,0,0);
+        interviewService.addNewInterview(interview);
+        session.setAttribute("interview",interview);
+        return "../../success";
+    }
+    @RequestMapping("/showUserInter")
+    public String showUserInter(@RequestParam(value = "currentPage",defaultValue = "1")int currentPage,HttpSession session) throws IOException {
+        User user= (User) session.getAttribute("user");
+        List<WaitInter> waitInterList=waitInterService.getWaitInterByUser(user);
+        int pageSize = 5;
+        int totalRows  = waitInterList.size();
+        int totalPages = totalRows%pageSize==0?totalRows/pageSize :totalRows/pageSize + 1;
+        int begin = (currentPage-1)*pageSize+1;
+        int end = (currentPage-1)*pageSize+pageSize;
+        List<WaitInter> waitInterList1=waitInterService.getWaitInterByPage(user.getId(),begin,end);
+        session.setAttribute("waitInterByUser",waitInterList1);
+        session.setAttribute("currentPage",currentPage);
+        session.setAttribute("totalPages",totalPages);
+        return "showUserInter";
+    }
+    @RequestMapping("/acceptInter")
+    public String acceptInter(HttpServletResponse response,WaitInter waitInter) throws IOException {
+        WaitInter waitInter1=waitInterService.getWaitInterById(waitInter);
+        if (waitInter.getWistate()!=0){
+            response.getWriter().print("你已经回复了这份面试，不能再次回复!");
+        }else {
+            waitInter1.setWistate(1);
+            waitInterService.updateWaitInterWistate(waitInter1);
+            response.getWriter().print("你已经接受面试，请做好准备。");
+        }
+        return "redirect:showUserInter";
+    }
+    @RequestMapping("/refuseInter")
+    public String refuseInter(HttpServletResponse response,WaitInter waitInter) throws IOException {
+        WaitInter waitInter1=waitInterService.getWaitInterById(waitInter);
+        if (waitInter.getWistate()!=0){
+            response.getWriter().print("你已经回复了这份面试，不能再次回复!");
+        }else {
+            waitInter1.setWistate(2);
+            waitInterService.updateWaitInterWistate(waitInter1);
+            response.getWriter().print("你已经接受面试，请做好准备。");
+        }
+        return "redirect:showUserInter";
     }
 }

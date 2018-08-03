@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iotek.dao.TrainMapper">
+
+
+    <insert id="addNewTrain">
+        INSERT INTO T_TRAIN VALUES (TRAIN_SEQ.nextval,#{trname},#{trcoutent},#{trstart},#{trend},#{traddress},#{trtime},0)
+    </insert>
+    <update id="updateTrain">
+        UPDATE T_TRAIN SET TR_STATE=#{trstate} where TR_ID=#{trid}
+    </update>
+    <delete id="deleteTrain">
+        DELETE FROM T_TRAIN WHERE TR_ID=#{trid}
+    </delete>
+    <select id="getTrain" resultType="com.iotek.model.Train">
+        SELECT * FROM T_TRAIN WHERE TR_STATE=#{0}
+    </select>
+    <select id="getTrainByPages" resultType="com.iotek.model.Train">
+        SELECT * FROM (SELECT  T_TRAIN.*,rownum rn FROM T_TRAIN WHERE T_TRAIN.TR_STATE=#{0} )
+        and rn between #{1} and #{2}
+    </select>
+</mapper>

@@ -8,16 +8,35 @@ import java.util.Date;
 /**
  * Created by sakura浮沉 on 2018/8/1.
  */
+//等待面试
 public class WaitInter implements Serializable {
-    private int wiid;
-    private Rec rec;
-    private Resume resume;
-    private Date witime;
-    private String wiaddress;
-    private Employees employees;
-    private User user;
+    private int wiid;   //id
+    private Rec rec;      //招聘id
+    private Resume resume;   //简历id
+    private Date witime;     //面试时间
+    private String wiaddress;  //面试地点
+
+    private User user;     //面试人员
+    private  int wistate;   //用户是否接受面试，0为默认，管理员设置，1为接受，2为拒绝
+
+    public int getWistate() {
+        return wistate;
+    }
+
+    public void setWistate(int wistate) {
+        this.wistate = wistate;
+    }
 
     public WaitInter() {
+    }
+
+    public WaitInter(Rec rec, Resume resume, Date witime, String wiaddress, User user,int wistate) {
+        this.rec = rec;
+        this.resume = resume;
+        this.witime = witime;
+        this.wiaddress = wiaddress;
+        this.user = user;
+        this.wistate=wistate;
     }
 
     public int getWiid() {
@@ -58,14 +77,6 @@ public class WaitInter implements Serializable {
 
     public void setWiaddress(String wiaddress) {
         this.wiaddress = wiaddress;
-    }
-
-    public Employees getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Employees employees) {
-        this.employees = employees;
     }
 
     public User getUser() {

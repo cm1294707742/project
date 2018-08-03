@@ -6,9 +6,10 @@ import java.util.Date;
 /**
  * Created by sakura浮沉 on 2018/7/30.
  */
+//部门表
 public class Department implements Serializable {
     private int did;
-    private String dname;
+    private String dname;    //部门名
     private Date dtime;   //部门创建时间
 
     public Department() {

@@ -19,10 +19,10 @@
 <form method="post" action="userLogin">
     <div id="d2211"><h3 style="height:40px;margin-top:20px">用户密码登录</h3></div>
     <div>
-        <input type="text" name="uname" style="height:40px;width:200px "/>
+        账号：<input type="text" name="uname" style="height:40px;width:200px "/>
     </div>
     <div>
-        <input type="password" name="upass" style="height:40px;width:200px "/>
+        密码：<input type="password" name="upass" style="height:40px;width:200px "/>
     </div>
     <div>
         <input type="submit" value="登录" style="background-color: orangered;height:40px;margin-top: 15px;width: 240px;margin-bottom: 15px"/>

@@ -7,20 +7,20 @@ import java.util.Date;
  * Created by sakura浮沉 on 2018/7/26.
  */
 public class Resume implements Serializable {   //用户简历类
-    private int urid;
-    private String urname;
-    private String ursex;
-    private String urnative;
-    private String urschool;
-    private String uredu;
-    private String urtel;
-    private Date urbirthday;
-    private String uremail;
-    private String urskills;
-    private String urhobby;
-    private String urexperience;
-    private String urintroduce;
-    private User user;
+    private int urid;               //简历id
+    private String urname;        //简历姓名
+    private String ursex;        //性别
+    private String urnative;     //籍贯
+    private String urschool;      //毕业学校
+    private String uredu;         //学历
+    private String urtel;          //电话
+    private Date urbirthday;      //出生年月
+    private String uremail;        //邮箱
+    private String urskills;        //个人技能
+    private String urhobby;         //爱好
+    private String urexperience;    //工作经验
+    private String urintroduce;      //个人介绍
+    private User user;               //用户id
 
     public Resume() {
     }

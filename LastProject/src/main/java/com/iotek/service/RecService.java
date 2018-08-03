@@ -10,4 +10,5 @@ import java.util.List;
 public interface RecService {
     List<Rec> getRecByState(int state);
     List<Rec> getRecByPage(int state,int begin, int end);
+    Rec getRecById(Rec rec);
 }

@@ -8,9 +8,9 @@ import java.util.List;
  * Created by sakura浮沉 on 2018/7/26.
  */
 public class User implements Serializable {
-    private int id;
-    private String uname;
-    private String upass;
+    private int id;     //用户id
+    private String uname;    //用户账号
+    private String upass;    //用户密码
     private List<Resume> resumeList=new ArrayList<Resume>();
     public User() {
     }

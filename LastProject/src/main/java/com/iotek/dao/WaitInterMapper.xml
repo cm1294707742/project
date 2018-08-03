@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iotek.dao.WaitInterMapper">
+
+
+    <insert id="addNewWaitInterMapper">
+
+    </insert>
+    <update id="updateWaitInterWistate">
+        UPDATE T_WAITINTER SET WI_STATE=#{waitInter.wistate}
+    </update>
+    <select id="getWaitInterByUser" resultType="com.iotek.model.WaitInter">
+        SELECT * FROM T_WAITINTER WHERE WI_UID=#{user.id}
+    </select>
+    <select id="getWaitInterByPage" resultType="com.iotek.model.WaitInter">
+         SELECT * from (SELECT T_WAITINTER.*,rownum rn FROM T_WAITINTER WHERE T_WAITINTER.WI_UID=#{0})
+        and rn between #{1} and #{2}
+    </select>
+    <select id="getWaitInter" resultType="com.iotek.model.WaitInter">
+        SELECT * FROM T_WAITINTER
+    </select>
+    <select id="getWaitInterByPageManager" resultType="com.iotek.model.WaitInter">
+         SELECT * from (SELECT T_WAITINTER.*,rownum rn FROM T_WAITINTER )
+        WHERE rn between #{0} and #{1}
+    </select>
+    <select id="getWaitInterById" resultType="com.iotek.model.WaitInter">
+        SELECT  * FROM T_WAITINTER WHERE WI_ID=#{waitInter.wiid}
+    </select>
+</mapper>
